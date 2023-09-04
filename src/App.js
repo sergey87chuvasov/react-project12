@@ -1,5 +1,12 @@
+import React from 'react';
+import Main from './components/pages/Main';
+
 function App() {
-  return <div className='App'></div>;
+  return (
+    <React.Fragment>
+      <Main />
+    </React.Fragment>
+  );
 }
 
 export default App;
