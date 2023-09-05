@@ -4,7 +4,7 @@ import Footer from '../views/global/Footer';
 import InputComponent from '../comps/Input';
 import css from '../../styles/form.css';
 
-const { FormContainer } = css;
+const { FormContainer, Button } = css;
 
 const Main = () => {
   return (
@@ -14,6 +14,9 @@ const Main = () => {
         <InputComponent placeholder={'Введите сумму транзакции'} />
         <InputComponent placeholder={'Введите тип транзакции'} />
         <InputComponent placeholder={'Введите комментарии'} />
+        <Button backgroundColor={'rgb(229, 229, 229)'}>
+          Сохранить транзакцию
+        </Button>
       </FormContainer>
       <Footer></Footer>
     </React.Fragment>
