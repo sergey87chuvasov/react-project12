@@ -4,7 +4,7 @@ import css from '../../styles/form.css';
 const { Input } = css;
 
 const InputComponent = (props) => {
-  const { placeholder, action, inputValue } = props;
+  const [placeholder, action, inputValue] = props;
 
   return (
     <React.Fragment>
