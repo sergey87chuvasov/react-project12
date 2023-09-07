@@ -1,24 +1,23 @@
-import React, { useState } from 'react';
+import React from 'react';
 import css from '../../styles/form.css';
 
 const { Input } = css;
 
 const InputComponent = (props) => {
-  const { placeholder } = props;
-  const [inputValue, setInputValue] = useState(0);
+  const { placeholder, action, inputValue } = props;
 
   return (
     <React.Fragment>
       <Input
+        value={inputValue}
         type={'text'}
         placeholder={placeholder}
         maxLength={'100'}
-        onChange={(e) => {
-          const newValue = e.target.value;
-          setInputValue(newValue);
+        onChange={(event) => {
+          const newValue = event.target.value;
+          action(newValue);
         }}
       />
-      <span>{inputValue} BYN</span>
     </React.Fragment>
   );
 };
