@@ -13,14 +13,19 @@ const buttonsCss = {
   outline: 'none',
 };
 
-const Header = () => {
+const Header = (props) => {
+  const { action } = props;
   return (
     <React.Fragment>
       <HeaderContainer>
         <HeaderCSS.Logo>FINN MANAGER</HeaderCSS.Logo>
         <HeaderCSS.MenuContainer>
-          <button style={buttonsCss}>Главная</button>
-          <button style={buttonsCss}>Статистика</button>
+          <button onClick={() => action('main')} style={buttonsCss}>
+            Главная
+          </button>
+          <button onClick={() => action('stat')} style={buttonsCss}>
+            Статистика
+          </button>
           <button style={buttonsCss}>Планирование</button>
         </HeaderCSS.MenuContainer>
       </HeaderContainer>
