@@ -8,13 +8,19 @@ import css from '../../styles/form.css';
 const { FormContainer, Button } = css;
 
 const Main = () => {
-  const [value, setValue] = useState();
-  const [type, setType] = useState();
-  const [comment, setComment] = useState();
+  const [value, setValue] = useState('');
+  const [type, setType] = useState('');
+  const [comment, setComment] = useState('');
+
+  const [data, setData] = useState([]);
 
   const validation = () => {
     if (value.length > 2 && type) {
       console.log('валидация прошла успешно');
+
+      const dataLine = `${value}::${type}::${comment}`;
+
+      setData((prev) => [...prev, dataLine]);
 
       setValue('');
       setType('');
@@ -56,7 +62,7 @@ const Main = () => {
           Сохранить транзакцию
         </Button>
       </FormContainer>
-      <DataList></DataList>
+      <DataList data={data}></DataList>
       <Footer></Footer>
     </React.Fragment>
   );
