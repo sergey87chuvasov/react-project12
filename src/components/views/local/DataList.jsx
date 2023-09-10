@@ -11,32 +11,30 @@ const DataList = (props) => {
   const filterDataSumm = data
     .filter((item) => item.split('::')[1] === dataType)
     .reduce((summ, item) => {
-      return (
-        summ +
-        +(item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
-      );
+      // console.log('filterDataSumm', item);
+      // console.log(summ);
+      // console.log(item.split('::')[0]);
+      return summ + +item.split('::')[0];
     }, 0);
 
   const filterDataDelta = data.reduce((summ, item) => {
+    // console.log(item);
     if (item.split('::')[1] === 'доход') {
-      return (
-        summ +
-        +(item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
-      );
+      // console.log(item);
+      return summ + +item.split('::')[0];
     } else {
-      return (
-        summ -
-        +(item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
-      );
+      return summ - +item.split('::')[0];
     }
   }, 0);
+
+  // console.log(filterDataDelta);
 
   const reduceDataType1 = () => setDataType('доход');
   const reduceDataType2 = () => setDataType('расход');
   const reduceDataType3 = () => setDataType('');
 
   useEffect(() => {
-    console.log(data);
+    // console.log(data);
   }, []);
 
   return (
