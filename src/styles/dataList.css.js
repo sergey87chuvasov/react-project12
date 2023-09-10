@@ -29,6 +29,24 @@ const css = {
     width: ${(props) => props.width};
     text-align: center;
   `,
+  ButtonsLine: styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    width: 800px;
+    margin: 0 auto;
+    margin-top: 40px;
+  `,
+  ButtonItem: styled.span`
+    display: block;
+    position: relative;
+    font-size: 13px;
+    color: grey;
+    margin-right: 40px;
+    cursor: pointer;
+  `,
 };
 
 export default css;
