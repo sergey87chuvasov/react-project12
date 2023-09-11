@@ -14,16 +14,25 @@ const DataList = (props) => {
       // console.log('filterDataSumm', item);
       // console.log(summ);
       // console.log(item.split('::')[0]);
-      return summ + +item.split('::')[0];
+      return (
+        summ +
+        +(item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
+      );
     }, 0);
 
   const filterDataDelta = data.reduce((summ, item) => {
     // console.log(item);
     if (item.split('::')[1] === 'доход') {
       // console.log(item);
-      return summ + +item.split('::')[0];
+      return (
+        summ +
+        (item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
+      );
     } else {
-      return summ - +item.split('::')[0];
+      return (
+        summ -
+        (item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
+      );
     }
   }, 0);
 

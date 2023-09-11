@@ -98,12 +98,12 @@ const MyResponsivePie = ({ data /* see data tab */ }) => (
     ]}
     legends={[
       {
-        anchor: 'bottom',
-        direction: 'row',
+        anchor: 'left',
+        direction: 'column',
         justify: false,
-        translateX: 0,
-        translateY: 56,
-        itemsSpacing: 30,
+        translateX: -80,
+        translateY: -125,
+        itemsSpacing: 10,
         itemWidth: 100,
         itemHeight: 18,
         itemTextColor: '#999',
@@ -125,7 +125,32 @@ const MyResponsivePie = ({ data /* see data tab */ }) => (
 );
 
 const DataChart = (props) => {
-  useEffect(() => {}, []);
+  const { data = [] } = props;
+
+  const filterData = data.filter((item) => item.split('::')[1] === 'расход');
+
+  const [r01, setR01] = useState(0);
+  const [r02, setR02] = useState(0);
+  const [r03, setR03] = useState(0);
+  const [r04, setR04] = useState(0);
+  const [r05, setR05] = useState(0);
+  const [r06, setR06] = useState(0);
+
+  useEffect(() => {
+    for (let i = 0; i < filterData.length; i++) {
+      if (filterData[i].split('::')[2] === 'оплата счетов') {
+        setR02(
+          (prev) =>
+            prev +
+            +(
+              filterData[i].split('::')[0].split(' ')[0] +
+              filterData[i].split('::')[0].split(' ')[1]
+            )
+        );
+      }
+    }
+  }, []);
+
   return (
     <DataContainer style={{ height: '500px' }}>
       <MyResponsivePie
@@ -133,37 +158,37 @@ const DataChart = (props) => {
           {
             id: 'Покупка продуктов',
             label: 'Покупка продуктов',
-            value: 44,
+            value: r01,
             color: 'hsl(215, 70%, 50%)',
           },
           {
             id: 'Оплата счетов',
             label: 'Оплата счетов',
-            value: 144,
+            value: r02,
             color: 'hsl(26, 70%, 50%)',
           },
           {
             id: 'Покупка одежды',
             label: 'Покупка одежды',
-            value: 281,
+            value: r03,
             color: 'hsl(89, 70%, 50%)',
           },
           {
             id: 'Расходы на транспорт',
             label: 'Расходы на транспорт',
-            value: 532,
+            value: r04,
             color: 'hsl(321, 70%, 50%)',
           },
           {
             id: 'Развлечения',
             label: 'Развлечения',
-            value: 113,
+            value: r05,
             color: 'hsl(56, 70%, 50%)',
           },
           {
             id: 'Путешевствия',
             label: 'Путешевствия',
-            value: 223,
+            value: r06,
             color: 'hsl(56, 70%, 50%)',
           },
         ]}

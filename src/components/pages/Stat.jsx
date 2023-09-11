@@ -8,7 +8,7 @@ const Stat = (props) => {
   return (
     <React.Fragment>
       <DataList data={statData}></DataList>
-      <DataChart />
+      <DataChart data={statData} />
       <Footer></Footer>
     </React.Fragment>
   );
