@@ -125,7 +125,7 @@ const MyResponsivePie = ({ data /* see data tab */ }) => (
 );
 
 const DataChart = (props) => {
-  const { data = [] } = props;
+  const { data = [], show } = props;
 
   const filterData = data.filter((item) => item.split('::')[1] === 'расход');
 
@@ -138,8 +138,63 @@ const DataChart = (props) => {
 
   useEffect(() => {
     for (let i = 0; i < filterData.length; i++) {
+      if (filterData[i].split('::')[2] === 'покупка продуктов') {
+        setR01(
+          (prev) =>
+            prev +
+            +(
+              filterData[i].split('::')[0].split(' ')[0] +
+              filterData[i].split('::')[0].split(' ')[1]
+            )
+        );
+      }
+
       if (filterData[i].split('::')[2] === 'оплата счетов') {
         setR02(
+          (prev) =>
+            prev +
+            +(
+              filterData[i].split('::')[0].split(' ')[0] +
+              filterData[i].split('::')[0].split(' ')[1]
+            )
+        );
+      }
+
+      if (filterData[i].split('::')[2] === 'покупка одежды') {
+        setR03(
+          (prev) =>
+            prev +
+            +(
+              filterData[i].split('::')[0].split(' ')[0] +
+              filterData[i].split('::')[0].split(' ')[1]
+            )
+        );
+      }
+
+      if (filterData[i].split('::')[2] === 'расходы на транспорт') {
+        setR04(
+          (prev) =>
+            prev +
+            +(
+              filterData[i].split('::')[0].split(' ')[0] +
+              filterData[i].split('::')[0].split(' ')[1]
+            )
+        );
+      }
+
+      if (filterData[i].split('::')[2] === 'развлечения') {
+        setR05(
+          (prev) =>
+            prev +
+            +(
+              filterData[i].split('::')[0].split(' ')[0] +
+              filterData[i].split('::')[0].split(' ')[1]
+            )
+        );
+      }
+
+      if (filterData[i].split('::')[2] === 'путешествия') {
+        setR06(
           (prev) =>
             prev +
             +(
@@ -152,48 +207,53 @@ const DataChart = (props) => {
   }, []);
 
   return (
-    <DataContainer style={{ height: '500px' }}>
-      <MyResponsivePie
-        data={[
-          {
-            id: 'Покупка продуктов',
-            label: 'Покупка продуктов',
-            value: r01,
-            color: 'hsl(215, 70%, 50%)',
-          },
-          {
-            id: 'Оплата счетов',
-            label: 'Оплата счетов',
-            value: r02,
-            color: 'hsl(26, 70%, 50%)',
-          },
-          {
-            id: 'Покупка одежды',
-            label: 'Покупка одежды',
-            value: r03,
-            color: 'hsl(89, 70%, 50%)',
-          },
-          {
-            id: 'Расходы на транспорт',
-            label: 'Расходы на транспорт',
-            value: r04,
-            color: 'hsl(321, 70%, 50%)',
-          },
-          {
-            id: 'Развлечения',
-            label: 'Развлечения',
-            value: r05,
-            color: 'hsl(56, 70%, 50%)',
-          },
-          {
-            id: 'Путешевствия',
-            label: 'Путешевствия',
-            value: r06,
-            color: 'hsl(56, 70%, 50%)',
-          },
-        ]}
-      />
-    </DataContainer>
+    <React.Fragment>
+      {show && (
+        <DataContainer style={{ height: '500px' }}>
+          <MyResponsivePie
+            data={[
+              {
+                id: 'Покупка продуктов',
+                label: 'Покупка продуктов',
+                value: r01,
+                color: 'hsl(215, 70%, 50%)',
+              },
+              {
+                id: 'Оплата счетов',
+                label: 'Оплата счетов',
+                value: r02,
+                color: 'hsl(26, 70%, 50%)',
+              },
+              {
+                id: 'Покупка одежды',
+                label: 'Покупка одежды',
+                value: r03,
+                color: 'hsl(89, 70%, 50%)',
+              },
+              {
+                id: 'Расходы на транспорт',
+                label: 'Расходы на транспорт',
+                value: r04,
+                color: 'hsl(321, 70%, 50%)',
+              },
+              {
+                id: 'Развлечения',
+                label: 'Развлечения',
+                value: r05,
+                color: 'hsl(56, 70%, 50%)',
+              },
+              {
+                id: 'Путешевствия',
+                label: 'Путешевствия',
+                value: r06,
+                color: 'hsl(56, 70%, 50%)',
+              },
+            ]}
+          />
+          )
+        </DataContainer>
+      )}
+    </React.Fragment>
   );
 };
 

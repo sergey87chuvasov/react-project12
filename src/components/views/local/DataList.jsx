@@ -5,7 +5,7 @@ const { DataContainer, ContentCell, ContentLine, ButtonsLine, ButtonItem } =
   css;
 
 const DataList = (props) => {
-  const { data = [] } = props;
+  const { data = [], setShow } = props;
   const [dataType, setDataType] = useState('расход');
   const filterData = data.filter((item) => item.split('::')[1] === dataType);
   const filterDataSumm = data
@@ -26,20 +26,26 @@ const DataList = (props) => {
       // console.log(item);
       return (
         summ +
-        (item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
+        +(item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
       );
     } else {
       return (
         summ -
-        (item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
+        +(item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
       );
     }
   }, 0);
 
   // console.log(filterDataDelta);
 
-  const reduceDataType1 = () => setDataType('доход');
-  const reduceDataType2 = () => setDataType('расход');
+  const reduceDataType1 = () => {
+    setDataType('доход');
+    setShow(false);
+  };
+  const reduceDataType2 = () => {
+    setDataType('расход');
+    setShow(true);
+  };
   const reduceDataType3 = () => setDataType('');
 
   useEffect(() => {
@@ -49,9 +55,24 @@ const DataList = (props) => {
   return (
     <React.Fragment>
       <ButtonsLine>
-        <ButtonItem onClick={reduceDataType1}>доходы</ButtonItem>
-        <ButtonItem onClick={reduceDataType2}>расходы</ButtonItem>
-        <ButtonItem onClick={reduceDataType3}>общее</ButtonItem>
+        <ButtonItem
+          style={{ fontWeight: dataType === 'доход' ? 'bold' : '' }}
+          onClick={reduceDataType1}
+        >
+          доходы
+        </ButtonItem>
+        <ButtonItem
+          style={{ fontWeight: dataType === 'расход' ? 'bold' : '' }}
+          onClick={reduceDataType2}
+        >
+          расходы
+        </ButtonItem>
+        <ButtonItem
+          style={{ fontWeight: dataType === '' ? 'bold' : '' }}
+          onClick={reduceDataType3}
+        >
+          общее
+        </ButtonItem>
       </ButtonsLine>
       <DataContainer>
         {filterData.length > 0 && (
