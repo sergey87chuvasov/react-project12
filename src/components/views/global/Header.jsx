@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import css from '../../../styles/styles.css';
 
 const { HeaderContainer, HeaderCSS } = css;
@@ -13,20 +14,37 @@ const buttonsCss = {
   outline: 'none',
 };
 
-const Header = (props) => {
-  const { action } = props;
+const Header = () => {
+  // const { action } = props;
   return (
     <React.Fragment>
       <HeaderContainer>
         <HeaderCSS.Logo>FINN MANAGER</HeaderCSS.Logo>
         <HeaderCSS.MenuContainer>
-          <button onClick={() => action('main')} style={buttonsCss}>
-            Главная
+          <button style={buttonsCss}>
+            <Link
+              style={{ color: 'inherit', textDecoration: 'none' }}
+              to={'/main'}
+            >
+              Главная
+            </Link>
           </button>
-          <button onClick={() => action('stat')} style={buttonsCss}>
-            Статистика
+          <button style={buttonsCss}>
+            <Link
+              style={{ color: 'inherit', textDecoration: 'none' }}
+              to={'/stat'}
+            >
+              Статистика
+            </Link>
           </button>
-          <button style={buttonsCss}>Планирование</button>
+          <button style={buttonsCss}>
+            <Link
+              style={{ color: 'inherit', textDecoration: 'none' }}
+              to={'/plan'}
+            >
+              Планирование
+            </Link>
+          </button>
         </HeaderCSS.MenuContainer>
       </HeaderContainer>
     </React.Fragment>

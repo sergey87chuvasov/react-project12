@@ -248,9 +248,8 @@ const DataChart = (props) => {
                 value: r06,
                 color: 'hsl(56, 70%, 50%)',
               },
-            ]}
+            ].filter((item) => item.value > 0)}
           />
-          )
         </DataContainer>
       )}
     </React.Fragment>
