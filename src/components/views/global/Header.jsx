@@ -33,7 +33,7 @@ const Header = () => {
               Главная
             </Link> */}
           </button>
-          <button onClick={() => navigate('/stat')} style={buttonsCss}>
+          <button onClick={() => navigate('/stat/расход')} style={buttonsCss}>
             Статистика
             {/* <Link
               style={{ color: 'inherit', textDecoration: 'none' }}
@@ -42,7 +42,7 @@ const Header = () => {
               Статистика
             </Link> */}
           </button>
-          <button onClick={() => navigate('/plan/demoPlan')} style={buttonsCss}>
+          <button onClick={() => navigate('/plan')} style={buttonsCss}>
             Планирование
             {/* <Link
               style={{ color: 'inherit', textDecoration: 'none' }}
