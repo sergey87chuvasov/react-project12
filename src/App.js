@@ -16,7 +16,7 @@ function App() {
       <Routes>
         <Route path={'/main'} element={<Main action={setData} />} />
         <Route path={'/stat'} element={<Stat statData={data} />} />
-        <Route path={'/plan'} element={<Plan />} />
+        <Route path={'/plan/:demoParam'} element={<Plan />} />
       </Routes>
       {/* <Header action={setShowPage}></Header> */}
       {/* {showPage === 'main' ? (
