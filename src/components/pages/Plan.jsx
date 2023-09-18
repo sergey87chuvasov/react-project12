@@ -1,30 +1,33 @@
-import React, { useEffect } from 'react';
-// import { useParams, useSearchParams } from 'react-router-dom';
+import React from 'react';
 
-const Plan = () => {
-  // const { demoParam } = useParams();
+export default class Plan extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      age: 22,
+      city: 'Paris',
+    };
+  }
 
-  // const [params, setParams] = useSearchParams();
+  shouldComponentUpdate(props, state) {}
 
-  // useEffect(() => {
-  //   console.log(demoParam);
-  //   setParams({ userName: 'Serge', userAge: '333' });
-  // }, [demoParam, setParams]);
+  componentDidUpdate(prevProps, prevState) {}
 
-  return (
-    <React.Fragment>
-      <span
-        style={{ marginTop: '100px', marginLeft: '130px', display: 'block' }}
-      >
-        Страница планирования
-      </span>
-      {/* <span
-        style={{ marginTop: '50px', marginLeft: '130px', display: 'block' }}
-      >
-        возраст пользователя - {params.get('userAge')}
-      </span> */}
-    </React.Fragment>
-  );
-};
+  componentDidMount() {}
 
-export default Plan;
+  componentWillUnmount() {}
+
+  render() {
+    return (
+      <>
+        <span>
+          добро пожаловать, {this.props.testProp}. Вам {this.state.age} лет. Вы
+          из города {this.state.city}
+        </span>
+        <button onClick={() => this.setState({ age: 30 })}>
+          Изменить возраст
+        </button>
+      </>
+    );
+  }
+}
