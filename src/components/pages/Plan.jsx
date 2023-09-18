@@ -7,15 +7,20 @@ export default class Plan extends React.Component {
       age: 22,
       city: 'Paris',
     };
+    // this.changeAge = this.changeAge.bind(this);
   }
 
-  shouldComponentUpdate(props, state) {}
+  // shouldComponentUpdate(props, state) {}
 
-  componentDidUpdate(prevProps, prevState) {}
+  // componentDidUpdate(prevProps, prevState) {}
 
-  componentDidMount() {}
+  // componentDidMount() {}
 
-  componentWillUnmount() {}
+  // componentWillUnmount() {}
+
+  changeAge = () => {
+    this.setState({ age: 30 });
+  };
 
   render() {
     return (
@@ -24,9 +29,16 @@ export default class Plan extends React.Component {
           добро пожаловать, {this.props.testProp}. Вам {this.state.age} лет. Вы
           из города {this.state.city}
         </span>
-        <button onClick={() => this.setState({ age: 30 })}>
+        {/* <button
+          onClick={() =>
+            this.setState((prevState, props) => ({
+              age: prevState.age + 4,
+            }))
+          }
+        >
           Изменить возраст
-        </button>
+        </button> */}
+        <button onClick={this.changeAge}>Изменить возраст</button>
       </>
     );
   }
