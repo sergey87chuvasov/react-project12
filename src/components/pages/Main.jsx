@@ -1,6 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
-import { changeViewType } from '../../redux-state/reducers/view-type-for-main';
+import {
+  changeViewType,
+  changeValue,
+  changeComment,
+} from '../../redux-state/reducers/view-type-for-main';
+
 import { useSelector, useDispatch } from 'react-redux';
 
 import Radio from '@mui/material/Radio';
@@ -18,36 +23,37 @@ const { FormContainer, Button } = css;
 const Main = (props) => {
   const { action } = props;
 
-  const [value, setValue] = useState('');
-  const [type, setType] = useState('доход');
-  const [comment, setComment] = useState('');
-
   const dispatch = useDispatch();
   const viewType = useSelector((state) => state.viewTypeMain.viewType);
+  const viewValue = useSelector((state) => state.viewTypeMain.value);
+  const viewComment = useSelector((state) => state.viewTypeMain.comment);
 
   const validation = () => {
-    if (value.length > 2 && type) {
+    if (viewValue.length > 2 && viewType) {
       console.log('валидация прошла успешно');
 
-      const dataLine = `${value}::${type}::${comment}`;
+      const dataLine = `${viewValue}::${viewType}::${viewComment}`;
 
       action((prev) => [...prev, dataLine]);
 
-      setValue('');
-      setType('доход');
-      setComment('');
+      dispatch(changeValue(''));
+      dispatch(changeViewType('доход'));
+      dispatch(changeComment(''));
     } else {
       console.log('валидация прошла не успешно');
     }
   };
 
   const handleChange = (event) => {
-    // setType(event.target.value);
     dispatch(changeViewType(event.target.value));
   };
 
-  const handleChangeComment = (event) => {
-    setComment(event.target.value);
+  const handleChangeValue = (param) => {
+    dispatch(changeValue(param));
+  };
+
+  const handleChangeComment = (param) => {
+    dispatch(changeComment(param));
   };
 
   useEffect(() => {
@@ -58,8 +64,8 @@ const Main = (props) => {
     <React.Fragment>
       <FormContainer style={{ alignItems: 'flex-start' }}>
         <InputComponent
-          inputValue={value}
-          action={setValue}
+          inputValue={viewValue}
+          action={handleChangeValue}
           placeholder={'Введите сумму транзакции'}
         />
         <FormControl style={{ marginTop: '9px', marginBottom: '12px' }}>
@@ -88,8 +94,8 @@ const Main = (props) => {
         /> */}
         {viewType === 'доход' && (
           <InputComponent
-            inputValue={comment}
-            action={setComment}
+            inputValue={viewComment}
+            action={handleChangeComment}
             placeholder={'Введите комментарии'}
           />
         )}
@@ -101,7 +107,7 @@ const Main = (props) => {
             <RadioGroup
               aria-labelledby='demo-controlled-radio-buttons-group'
               name='controlled-radio-buttons-group'
-              value={comment}
+              value={viewComment}
               onChange={handleChangeComment}
               style={{ marginTop: '5px', marginLeft: '6px' }}
             >
@@ -140,9 +146,9 @@ const Main = (props) => {
         )}
         <Button
           backgroundColor={
-            value.length < 3
+            viewValue.length < 3
               ? 'rgb(229, 229, 229)'
-              : type.length < 3
+              : viewType.length < 3
               ? 'rgb(229, 229, 229)'
               : 'rgb(176, 243, 71)'
           }

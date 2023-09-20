@@ -2,6 +2,8 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   viewType: 'доход',
+  value: '',
+  comment: '',
 };
 
 export const viewTypeMainReducer = createSlice({
@@ -11,8 +13,15 @@ export const viewTypeMainReducer = createSlice({
     changeViewType: (state, action) => {
       state.viewType = action.payload;
     },
+    changeValue: (state, action) => {
+      state.value = action.payload;
+    },
+    changeComment: (state, action) => {
+      state.value = action.payload;
+    },
   },
 });
 
-export const { changeViewType } = viewTypeMainReducer.actions;
+export const { changeViewType, changeValue, changeComment } =
+  viewTypeMainReducer.actions;
 export default viewTypeMainReducer.reducer;
