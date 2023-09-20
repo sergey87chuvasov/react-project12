@@ -1,4 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+
+import { changeViewType } from '../../redux-state/reducers/view-type-for-main';
+import { useSelector, useDispatch } from 'react-redux';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -19,6 +22,9 @@ const Main = (props) => {
   const [type, setType] = useState('доход');
   const [comment, setComment] = useState('');
 
+  const dispatch = useDispatch();
+  const viewType = useSelector((state) => state.viewTypeMain.viewType);
+
   const validation = () => {
     if (value.length > 2 && type) {
       console.log('валидация прошла успешно');
@@ -36,12 +42,17 @@ const Main = (props) => {
   };
 
   const handleChange = (event) => {
-    setType(event.target.value);
+    // setType(event.target.value);
+    dispatch(changeViewType(event.target.value));
   };
 
   const handleChangeComment = (event) => {
     setComment(event.target.value);
   };
+
+  useEffect(() => {
+    console.log(viewType);
+  }, [viewType]);
 
   return (
     <React.Fragment>
@@ -58,7 +69,7 @@ const Main = (props) => {
           <RadioGroup
             aria-labelledby='demo-controlled-radio-buttons-group'
             name='controlled-radio-buttons-group'
-            value={type}
+            value={viewType}
             onChange={handleChange}
             style={{ marginTop: '5px', marginLeft: '6px' }}
           >
@@ -75,14 +86,14 @@ const Main = (props) => {
           action={setType}
           placeholder={'Введите тип транзакции'}
         /> */}
-        {type === 'доход' && (
+        {viewType === 'доход' && (
           <InputComponent
             inputValue={comment}
             action={setComment}
             placeholder={'Введите комментарии'}
           />
         )}
-        {type === 'расход' && (
+        {viewType === 'расход' && (
           <FormControl style={{ marginTop: '0px', marginBottom: '14px' }}>
             <FormLabel id='demo-controlled-radio-buttons-group'>
               Выберите тип расходов
