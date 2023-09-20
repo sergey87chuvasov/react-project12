@@ -16,17 +16,9 @@ function App() {
       <Routes>
         <Route path={'/main'} element={<Main action={setData} />} />
         <Route path={'/stat/:viewType'} element={<Stat statData={data} />} />
-        <Route path={'/plan'} element={<Plan testProp={'nik'} />} />
+        <Route path={'/plan'} element={<Plan statData={data} />} />
         <Route path={'*'} element={<Main action={setData} />} />
       </Routes>
-      {/* <Header action={setShowPage}></Header> */}
-      {/* {showPage === 'main' ? (
-        <Main action={setData}></Main>
-      ) : showPage === 'stat' ? (
-        <Stat statData={data}></Stat>
-      ) : (
-        <Plan></Plan>
-      )} */}
     </React.Fragment>
   );
 }

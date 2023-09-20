@@ -1,44 +1,17 @@
 import React from 'react';
+import Footer from '../views/global/Footer';
+import DataList from '../views/local/DataList';
 
 export default class Plan extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      age: 22,
-      city: 'Paris',
-    };
-    // this.changeAge = this.changeAge.bind(this);
   }
-
-  // shouldComponentUpdate(props, state) {}
-
-  // componentDidUpdate(prevProps, prevState) {}
-
-  // componentDidMount() {}
-
-  // componentWillUnmount() {}
-
-  changeAge = () => {
-    this.setState({ age: 30 });
-  };
 
   render() {
     return (
       <>
-        <span>
-          добро пожаловать, {this.props.testProp}. Вам {this.state.age} лет. Вы
-          из города {this.state.city}
-        </span>
-        {/* <button
-          onClick={() =>
-            this.setState((prevState, props) => ({
-              age: prevState.age + 4,
-            }))
-          }
-        >
-          Изменить возраст
-        </button> */}
-        <button onClick={this.changeAge}>Изменить возраст</button>
+        <DataList viewType={'расход'} data={this.props.statData}></DataList>
+        <Footer></Footer>
       </>
     );
   }
