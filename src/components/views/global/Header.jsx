@@ -1,6 +1,11 @@
 import React from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import css from '../../../styles/styles.css';
+
+import HOCButton from '../../comps/HOCHeaderButton';
+import Button from '../../comps/Button';
+
+const HOCButtonComponent = HOCButton(Button);
 
 const { HeaderContainer, HeaderCSS } = css;
 
@@ -15,8 +20,6 @@ const buttonsCss = {
 };
 
 const Header = () => {
-  // const { action } = props;
-
   const navigate = useNavigate();
 
   return (
@@ -24,32 +27,18 @@ const Header = () => {
       <HeaderContainer>
         <HeaderCSS.Logo>FINN MANAGER</HeaderCSS.Logo>
         <HeaderCSS.MenuContainer>
+          <HOCButtonComponent
+            onClick={() => console.log('hello')}
+            inner={'demoButton'}
+          ></HOCButtonComponent>
           <button onClick={() => navigate('/main')} style={buttonsCss}>
             Главная
-            {/* <Link
-              style={{ color: 'inherit', textDecoration: 'none' }}
-              to={'/main'}
-            >
-              Главная
-            </Link> */}
           </button>
           <button onClick={() => navigate('/stat/расход')} style={buttonsCss}>
             Статистика
-            {/* <Link
-              style={{ color: 'inherit', textDecoration: 'none' }}
-              to={'/stat'}
-            >
-              Статистика
-            </Link> */}
           </button>
           <button onClick={() => navigate('/plan')} style={buttonsCss}>
             Планирование
-            {/* <Link
-              style={{ color: 'inherit', textDecoration: 'none' }}
-              to={'/plan'}
-            >
-              Планирование
-            </Link> */}
           </button>
         </HeaderCSS.MenuContainer>
       </HeaderContainer>

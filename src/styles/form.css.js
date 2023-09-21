@@ -23,11 +23,11 @@ const css = {
     outline: none;
     border: none;
     background-color: rgb(229, 229, 229);
-    border-radius: 5px;
+    border-radius: 4px;
     padding-left: 14px;
     margin-bottom: 10px;
-    &:nth-child(3) {
-      margin-bottom: 15px;
+    :last-child {
+      margin-bottom: 0px;
     }
   `,
   Button: styled.span`
@@ -36,7 +36,7 @@ const css = {
     width: 220px;
     height: 44px;
     line-height: 42px;
-    border-radius: 5px;
+    border-radius: 4px;
     text-align: center;
     cursor: pointer;
     background-color: ${(props) => props.backgroundColor};
