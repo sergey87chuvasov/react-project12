@@ -17,7 +17,7 @@ export const viewTypeMainReducer = createSlice({
       state.value = action.payload;
     },
     changeComment: (state, action) => {
-      state.value = action.payload;
+      state.comment = action.payload;
     },
   },
 });

@@ -34,7 +34,7 @@ const Main = (props) => {
 
       const dataLine = `${viewValue}::${viewType}::${viewComment}`;
 
-      action((prev) => [...prev, dataLine]);
+      action(dataLine);
 
       dispatch(changeValue(''));
       dispatch(changeViewType('доход'));
@@ -54,6 +54,10 @@ const Main = (props) => {
 
   const handleChangeComment = (param) => {
     dispatch(changeComment(param));
+  };
+
+  const handleChangeCommentRadio = (event) => {
+    dispatch(changeComment(event.target.value));
   };
 
   useEffect(() => {
@@ -87,11 +91,6 @@ const Main = (props) => {
             <FormControlLabel value='доход' control={<Radio />} label='доход' />
           </RadioGroup>
         </FormControl>
-        {/* <InputComponent
-          inputValue={type}
-          action={setType}
-          placeholder={'Введите тип транзакции'}
-        /> */}
         {viewType === 'доход' && (
           <InputComponent
             inputValue={viewComment}
@@ -108,7 +107,7 @@ const Main = (props) => {
               aria-labelledby='demo-controlled-radio-buttons-group'
               name='controlled-radio-buttons-group'
               value={viewComment}
-              onChange={handleChangeComment}
+              onChange={handleChangeCommentRadio}
               style={{ marginTop: '5px', marginLeft: '6px' }}
             >
               <FormControlLabel
