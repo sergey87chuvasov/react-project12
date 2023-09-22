@@ -1,11 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-const HOCButton = (ButtonComponent) => {
+const HOCButton = (ButtonComponent, params) => {
   return (props) => {
-    const click = () => {
+    // eslint-disable-next-line react-hooks/rules-of-hooks
+    const navigate = useNavigate();
+
+    const onClick = () => {
+      navigate(props.text);
       props.onClick();
     };
-    return <ButtonComponent {...props} onClick={click} />;
+    return <ButtonComponent {...props} onClick={onClick} />;
   };
 };
 

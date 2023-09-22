@@ -1,5 +1,5 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import css from '../../../styles/styles.css';
 
 import HOCButton from '../../comps/HOCHeaderButton';
@@ -9,18 +9,20 @@ const HOCButtonComponent = HOCButton(Button);
 
 const { HeaderContainer, HeaderCSS } = css;
 
-const buttonsCss = {
-  display: 'block',
-  padding: '10px 14px 12px',
-  borderRadius: '6px',
-  backgroundColor: '#B0F347',
-  cursor: 'pointer',
-  marginLeft: '10px',
-  outline: 'none',
-};
+// const buttonsCss = {
+//   display: 'block',
+//   padding: '10px 14px 12px',
+//   borderRadius: '6px',
+//   backgroundColor: '#B0F347',
+//   cursor: 'pointer',
+//   marginLeft: '10px',
+//   outline: 'none',
+// };
 
 const Header = () => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+
+  // const [inner, setInner] = useState(0);
 
   return (
     <React.Fragment>
@@ -28,18 +30,23 @@ const Header = () => {
         <HeaderCSS.Logo>FINN MANAGER</HeaderCSS.Logo>
         <HeaderCSS.MenuContainer>
           <HOCButtonComponent
-            onClick={() => console.log('hello')}
-            inner={'demoButton'}
-          ></HOCButtonComponent>
-          <button onClick={() => navigate('/main')} style={buttonsCss}>
+            text={'/main'}
+            onClick={() => console.log('переход по маршруту /main')}
+          >
             Главная
-          </button>
-          <button onClick={() => navigate('/stat/расход')} style={buttonsCss}>
+          </HOCButtonComponent>
+          <HOCButtonComponent
+            text={'/stat/расход'}
+            onClick={() => console.log('переход по маршруту /stat/расход')}
+          >
             Статистика
-          </button>
-          <button onClick={() => navigate('/plan')} style={buttonsCss}>
+          </HOCButtonComponent>
+          <HOCButtonComponent
+            text={'/plan'}
+            onClick={() => console.log('переход по маршруту /plan')}
+          >
             Планирование
-          </button>
+          </HOCButtonComponent>
         </HeaderCSS.MenuContainer>
       </HeaderContainer>
     </React.Fragment>

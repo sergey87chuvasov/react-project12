@@ -10,8 +10,13 @@ const buttonCss = {
 };
 
 const Button = (props) => {
-  const { inner } = props;
-  return <button style={buttonCss}>{inner}</button>;
+  const { children, onClick } = props;
+
+  return (
+    <button style={buttonCss} onClick={onClick}>
+      {children}
+    </button>
+  );
 };
 
 export default Button;
