@@ -1,26 +1,52 @@
-import React from 'react';
+import React, { useState, useMemo, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import css from '../../../styles/dataList.css';
 
 const { DataContainer, ContentCell, ContentLine, ButtonsLine, ButtonItem } =
   css;
 
-const DataList = (props) => {
-  const { data = [], setShow, viewType } = props;
-  const navigate = useNavigate();
-  // const [dataType, setDataType] = useState('расход');
-  const filterData = data.filter((item) => item.split('::')[1] === viewType);
-  const filterDataSumm = data
-    .filter((item) => item.split('::')[1] === viewType)
+const dataSumm = (paramData, view) => {
+  const returned = paramData
+    .filter((item) => item.split('::')[1] == view)
     .reduce((summ, item) => {
-      // console.log('filterDataSumm', item);
-      // console.log(summ);
-      // console.log(item.split('::')[0]);
       return (
         summ +
         +(item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
       );
     }, 0);
+
+  console.log('посчитана сумма');
+  return returned;
+};
+
+const DataList = (props) => {
+  const { data = [], setShow, viewType } = props;
+  const navigate = useNavigate();
+
+  const [bold, setBold] = useState(false);
+  // const [dataType, setDataType] = useState('расход');
+  const filterData = data.filter((item) => item.split('::')[1] === viewType);
+  // const filterDataSumm = data
+  //   .filter((item) => item.split('::')[1] === viewType)
+  //   .reduce((summ, item) => {
+  //     // console.log('filterDataSumm', item);
+  //     // console.log(summ);
+  //     // console.log(item.split('::')[0]);
+  //     return (
+  //       summ +
+  //       +(item.split('::')[0].split(' ')[0] + item.split('::')[0].split(' ')[1])
+  //     );
+  //   }, 0);
+
+  // const filterDataSumm = useMemo(
+  //   () => dataSumm(data, viewType),
+  //   [data, viewType]
+  // );
+
+  const filterDataSumm = useCallback(
+    () => dataSumm(data, viewType),
+    [data, viewType]
+  );
 
   const filterDataDelta = data.reduce((summ, item) => {
     // console.log(item);
@@ -52,9 +78,9 @@ const DataList = (props) => {
   };
   const reduceDataType3 = () => navigate('/stat/общее');
 
-  // useEffect(() => {
-  //   // console.log(data);
-  // }, []);
+  useEffect(() => {
+    filterDataSumm();
+  }, [filterDataSumm]);
 
   return (
     <React.Fragment>
@@ -91,9 +117,15 @@ const DataList = (props) => {
               );
             })}
             <ContentLine>
-              <ContentCell width={'20%'}>{filterDataSumm}</ContentCell>
-              <ContentCell width={'20%'}>--</ContentCell>
-              <ContentCell width={'60%'}>--</ContentCell>
+              <ContentCell
+                onClick={() => setBold(!bold)}
+                style={{ fontWeight: bold && 'bold' }}
+                width={'20%'}
+              >
+                {filterDataSumm}
+              </ContentCell>
+              <ContentCell width={'20%'}></ContentCell>
+              <ContentCell width={'60%'}></ContentCell>
             </ContentLine>
           </React.Fragment>
         )}
@@ -110,8 +142,8 @@ const DataList = (props) => {
             })}
             <ContentLine>
               <ContentCell width={'20%'}>{filterDataDelta}</ContentCell>
-              <ContentCell width={'20%'}>--</ContentCell>
-              <ContentCell width={'60%'}>--</ContentCell>
+              <ContentCell width={'20%'}></ContentCell>
+              <ContentCell width={'60%'}></ContentCell>
             </ContentLine>
           </React.Fragment>
         )}

@@ -5,15 +5,16 @@ import FooterContext from '../../../redux-state/contect/footerContext';
 const { FooterContainer } = css;
 
 const Footer = ({ children }) => {
-  const [footerText, setFooterText] = useContext(FooterContext);
+  // const [footerText, setFooterText] = useContext(FooterContext);
   return (
     <React.Fragment>
-      <FooterContainer
+      {/* <FooterContainer
         onClick={() => setFooterText('Новый текст для подвала')}
         style={{ justifyContent: 'space-around', fontSize: '14px' }}
       >
         {footerText}
-      </FooterContainer>
+      </FooterContainer> */}
+      <FooterContainer style={{ fontSize: '14px' }}></FooterContainer>
     </React.Fragment>
   );
 };

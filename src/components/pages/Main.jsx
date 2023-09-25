@@ -79,9 +79,12 @@ const Main = (props) => {
   return (
     <React.Fragment>
       <FormContainer style={{ alignItems: 'flex-start' }}>
-        {/*-------------------------------------------- */}
+        {/* ----------------------------------------- */}
+        {/* react useRef */}
+        {/* ----------------------------------------- */}
+
         <Button
-          backgroundColor={'rgb(176,243,71)'}
+          backgroundColor={'rgb(176, 243, 71)'}
           onClick={setFocus}
           style={{ marginBottom: '12px' }}
         >
@@ -96,16 +99,24 @@ const Main = (props) => {
           disabled
           onChange={(event) => {
             const newValue = event.target.value;
+            // formating(newValue);
             handleChangeValue(newValue);
           }}
-        ></Input>
-        {/*-------------------------------------------- */}
-        <InputComponent
-          ref={valueInput}
-          inputValue={viewValue}
-          action={handleChangeValue}
-          placeholder={'Введите сумму транзакции'}
         />
+
+        {/* ----------------------------------------- */}
+        {/* react useRef */}
+        {/* ----------------------------------------- */}
+
+        {false && (
+          <InputComponent
+            ref={valueInput}
+            inputValue={viewValue}
+            action={handleChangeValue}
+            placeholder={'Введите сумму транзакции'}
+          />
+        )}
+
         <FormControl style={{ marginTop: '9px', marginBottom: '12px' }}>
           <FormLabel id='demo-controlled-radio-buttons-group'>
             Выберите тип транзакции
@@ -120,16 +131,16 @@ const Main = (props) => {
             <FormControlLabel
               value='расход'
               control={<Radio />}
-              label='расход'
+              label='Расход'
             />
-            <FormControlLabel value='доход' control={<Radio />} label='доход' />
+            <FormControlLabel value='доход' control={<Radio />} label='Доход' />
           </RadioGroup>
         </FormControl>
         {viewType === 'доход' && (
           <InputComponent
             inputValue={viewComment}
             action={handleChangeComment}
-            placeholder={'Введите комментарии'}
+            placeholder={'Введите комментарий'}
           />
         )}
         {viewType === 'расход' && (
@@ -147,32 +158,32 @@ const Main = (props) => {
               <FormControlLabel
                 value='покупка продуктов'
                 control={<Radio />}
-                label='покупка продуктов'
+                label='Покупка продуктов'
               />
               <FormControlLabel
                 value='оплата счетов'
                 control={<Radio />}
-                label='оплата счетов'
+                label='Оплата счетов'
               />
               <FormControlLabel
                 value='покупка одежды'
                 control={<Radio />}
-                label='покупка одежды'
+                label='Покупка одежды'
               />
               <FormControlLabel
                 value='расходы на транспорт'
                 control={<Radio />}
-                label='расходы на транспорт'
+                label='Расходы на транспорт'
               />
               <FormControlLabel
                 value='развлечения'
                 control={<Radio />}
-                label='развлечения'
+                label='Развлечения'
               />
               <FormControlLabel
                 value='путешествия'
                 control={<Radio />}
-                label='путешествия'
+                label='Путешествия'
               />
             </RadioGroup>
           </FormControl>
