@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import {
   changeViewType,
@@ -7,6 +7,8 @@ import {
 } from '../../redux-state/reducers/view-type-for-main';
 
 import { useSelector, useDispatch } from 'react-redux';
+
+import FooterContext from '../../redux-state/contect/footerContext';
 
 import Radio from '@mui/material/Radio';
 import RadioGroup from '@mui/material/RadioGroup';
@@ -18,10 +20,15 @@ import Footer from '../views/global/Footer';
 import InputComponent from '../comps/Input';
 import css from '../../styles/form.css';
 
-const { FormContainer, Button } = css;
+import { useRef } from 'react';
+
+const { FormContainer, Button, Input } = css;
 
 const Main = (props) => {
   const { action } = props;
+
+  const valueInput = useRef();
+  const [footerText, setFooterText] = useState('Курс по основам REACT JS');
 
   const dispatch = useDispatch();
   const viewType = useSelector((state) => state.viewTypeMain.viewType);
@@ -60,6 +67,11 @@ const Main = (props) => {
     dispatch(changeComment(event.target.value));
   };
 
+  const setFocus = () => {
+    valueInput.current.disabled = false;
+    valueInput.current.focus();
+  };
+
   useEffect(() => {
     console.log(viewType);
   }, [viewType]);
@@ -67,7 +79,29 @@ const Main = (props) => {
   return (
     <React.Fragment>
       <FormContainer style={{ alignItems: 'flex-start' }}>
+        {/*-------------------------------------------- */}
+        <Button
+          backgroundColor={'rgb(176,243,71)'}
+          onClick={setFocus}
+          style={{ marginBottom: '12px' }}
+        >
+          Начать заполнение
+        </Button>
+        <Input
+          ref={valueInput}
+          value={viewValue}
+          type={'text'}
+          placeholder={'Введите сумму транзакции'}
+          maxLength={'100'}
+          disabled
+          onChange={(event) => {
+            const newValue = event.target.value;
+            handleChangeValue(newValue);
+          }}
+        ></Input>
+        {/*-------------------------------------------- */}
         <InputComponent
+          ref={valueInput}
           inputValue={viewValue}
           action={handleChangeValue}
           placeholder={'Введите сумму транзакции'}
@@ -156,7 +190,20 @@ const Main = (props) => {
           Сохранить транзакцию
         </Button>
       </FormContainer>
-      <Footer></Footer>
+
+      {true && (
+        <FooterContext.Provider value={[footerText, setFooterText]}>
+          <Footer></Footer>
+        </FooterContext.Provider>
+      )}
+
+      {false && (
+        <FooterContext.Provider value={footerText}>
+          <FooterContext.Consumer>
+            {(value) => <Footer>{value}</Footer>}
+          </FooterContext.Consumer>
+        </FooterContext.Provider>
+      )}
     </React.Fragment>
   );
 };

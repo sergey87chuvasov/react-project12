@@ -1,12 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import css from '../../../styles/styles.css';
+import FooterContext from '../../../redux-state/contect/footerContext';
 
 const { FooterContainer } = css;
 
-const Footer = () => {
+const Footer = ({ children }) => {
+  const [footerText, setFooterText] = useContext(FooterContext);
   return (
     <React.Fragment>
-      <FooterContainer></FooterContainer>
+      <FooterContainer
+        onClick={() => setFooterText('Новый текст для подвала')}
+        style={{ justifyContent: 'space-around', fontSize: '14px' }}
+      >
+        {footerText}
+      </FooterContainer>
     </React.Fragment>
   );
 };
