@@ -22,6 +22,8 @@ import css from '../../styles/form.css';
 
 import { useRef } from 'react';
 
+import useNumberValueFormat from '../../hooks/useNumberValueFormat';
+
 const { FormContainer, Button, Input } = css;
 
 const Main = (props) => {
@@ -30,16 +32,18 @@ const Main = (props) => {
   const valueInput = useRef();
   const [footerText, setFooterText] = useState('Курс по основам REACT JS');
 
+  const [formatValue, formating] = useNumberValueFormat();
+
   const dispatch = useDispatch();
   const viewType = useSelector((state) => state.viewTypeMain.viewType);
   const viewValue = useSelector((state) => state.viewTypeMain.value);
   const viewComment = useSelector((state) => state.viewTypeMain.comment);
 
   const validation = () => {
-    if (viewValue.length > 2 && viewType) {
+    if (formatValue.length > 2 && viewType) {
       console.log('валидация прошла успешно');
 
-      const dataLine = `${viewValue}::${viewType}::${viewComment}`;
+      const dataLine = `${formatValue}::${viewType}::${viewComment}`;
 
       action(dataLine);
 
@@ -76,6 +80,10 @@ const Main = (props) => {
     console.log(viewType);
   }, [viewType]);
 
+  useEffect(() => {
+    console.log(formatValue);
+  }, [formatValue]);
+
   return (
     <React.Fragment>
       <FormContainer style={{ alignItems: 'flex-start' }}>
@@ -99,7 +107,7 @@ const Main = (props) => {
           disabled
           onChange={(event) => {
             const newValue = event.target.value;
-            // formating(newValue);
+            formating(newValue);
             handleChangeValue(newValue);
           }}
         />
